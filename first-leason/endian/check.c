@@ -13,10 +13,14 @@ int checkCPUendian()
 }
 
 int main(){
-    int i = checkCPUendian();
-    printf("%d\n",i);
+     if (checkCPUendian()) {
+        printf("little\n");
+    }else {
+        printf("big\n");
+    }
 
     char a[] = "0123456789abcdef";
     printf("%p\t %c\t %p\n", a, *(a+1), a-1);
+    
     return 0;
 }
