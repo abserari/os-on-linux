@@ -1,19 +1,18 @@
 #include <stdio.h>
 
 // 1 little endian, 0 big endian
-int checkCPUendian()
-{
+int checkCPUendian() {
     union
     {
         unsigned int  a;
         unsigned char b;
-    }c;
+    } c;
     c.a = 1;
     return 1 == c.b;
 }
 
-int main(){
-     if (checkCPUendian()) {
+int main() {
+    if (checkCPUendian()) {
         printf("little\n");
     }else {
         printf("big\n");
