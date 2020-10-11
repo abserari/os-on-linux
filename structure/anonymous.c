@@ -21,9 +21,14 @@ struct fooState {
         int to;
         int from;
     } bar;
+    struct  {
+        int id;
+        int to;
+        int from;
+    } see;
 } foo = {1,2,3};
 
 int main(int argc, char *argv[]) {
-    printf("%d\n",foo.bar.id);
+    printf("%d\n",foo.see.id);
     return 0;
 }
