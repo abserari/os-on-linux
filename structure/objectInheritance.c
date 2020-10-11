@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include <stddef.h>
 
-#define CustomTransfer(a) ( (_customObject*) ( ((char*)a) - \
-offsetof(_customObject,obj_T) ) )
-
-typedef struct parentObject {
+typedef struct list_head {
     int count;
-}parentObject ;
+}list_head ;
 
-int ref(struct parentObject *obj) {
+int ref(struct list_head *obj) {
     return obj->count;
 }
 
+
+#define CustomTransfer_T(a) ( (_customObject*) ( ((char*)a) - \
+offsetof(_customObject,obj_T) ) )
+
 typedef struct _customObject {
-    parentObject obj;
-    parentObject obj_T;
+    list_head obj;
+    list_head obj_T;
     int extra;
 }_customObject;
 
@@ -26,9 +27,9 @@ void main() {
     _customObject custom = {10,11,12};
 
     printf("%d\n",ref(&custom.obj));
-    printf("%d\n",ref((parentObject*)&custom));
-    printf("%d\n",ref((parentObject*)(&custom.obj_T)));
+    printf("%d\n",ref((list_head*)&custom));
+    printf("%d\n",ref((list_head*)(&custom.obj_T)));
 
-    parentObject* parent_T = &custom.obj_T;
-    printf("%d\n",sum(CustomTransfer(parent_T)));
+    list_head* parent_T = &custom.obj_T;
+    printf("%d\n",sum(CustomTransfer_T(parent_T)));
 }
